@@ -45,24 +45,22 @@ const seedIfEmpty = async () => {
                 ]
             },
             {
-                name: 'Master of Computer Applications', code: 'MCA', duration: '2 Years', totalSemesters: 4,
-                description: 'Postgraduate program in computer applications.',
+                name: 'Bachelor of Business Administration', code: 'BBA', duration: '3 Years', totalSemesters: 6,
+                description: 'Undergraduate program in business administration.',
                 semesters: [
                     {
-                        number: 1, name: 'First Semester', desc: 'Foundation subjects for MCA.',
+                        number: 1, name: 'First Semester', desc: 'Foundation for Business',
                         subjects: [
-                            { code: 'MCA101', name: 'Programming Fundamentals', credits: 4, type: 'Core' },
-                            { code: 'MCA102', name: 'Database Management Systems', credits: 4, type: 'Core' },
-                            { code: 'MCA103', name: 'Computer Networks', credits: 3, type: 'Core' },
-                            { code: 'MCA104', name: 'Operating Systems', credits: 4, type: 'Core' }
+                            { code: 'BBA101', name: 'Principles of Management', credits: 4, type: 'Core' },
+                            { code: 'BBA102', name: 'Business Economics', credits: 4, type: 'Core' },
+                            { code: 'BBA103', name: 'Financial Accounting', credits: 4, type: 'Core' },
                         ]
                     },
                     {
-                        number: 2, name: 'Second Semester', desc: 'Core subjects for MCA.',
+                        number: 2, name: 'Second Semester', desc: 'Core BBA concepts',
                         subjects: [
-                            { code: 'MCA201', name: 'Data Structures', credits: 4, type: 'Core' },
-                            { code: 'MCA202', name: 'Web Technologies', credits: 4, type: 'Core' },
-                            { code: 'MCA203', name: 'Software Engineering', credits: 3, type: 'Core' }
+                            { code: 'BBA201', name: 'Marketing Management', credits: 4, type: 'Core' },
+                            { code: 'BBA202', name: 'Business Communication', credits: 4, type: 'Core' },
                         ]
                     }
                 ]
@@ -84,6 +82,29 @@ const seedIfEmpty = async () => {
                         subjects: [
                             { code: 'BT201', name: 'Programming for Problem Solving', credits: 4, type: 'Core' },
                             { code: 'BT202', name: 'Engineering Chemistry', credits: 4, type: 'Core' },
+                        ]
+                    }
+                ]
+            },
+            {
+                name: 'Master of Computer Applications', code: 'MCA', duration: '2 Years', totalSemesters: 4,
+                description: 'Postgraduate program in computer applications.',
+                semesters: [
+                    {
+                        number: 1, name: 'First Semester', desc: 'Foundation subjects for MCA.',
+                        subjects: [
+                            { code: 'MCA101', name: 'Programming Fundamentals', credits: 4, type: 'Core' },
+                            { code: 'MCA102', name: 'Database Management Systems', credits: 4, type: 'Core' },
+                            { code: 'MCA103', name: 'Computer Networks', credits: 3, type: 'Core' },
+                            { code: 'MCA104', name: 'Operating Systems', credits: 4, type: 'Core' }
+                        ]
+                    },
+                    {
+                        number: 2, name: 'Second Semester', desc: 'Core subjects for MCA.',
+                        subjects: [
+                            { code: 'MCA201', name: 'Data Structures', credits: 4, type: 'Core' },
+                            { code: 'MCA202', name: 'Web Technologies', credits: 4, type: 'Core' },
+                            { code: 'MCA203', name: 'Software Engineering', credits: 3, type: 'Core' }
                         ]
                     }
                 ]

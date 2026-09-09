@@ -10,7 +10,25 @@ export default function Programs() {
     getPrograms().then(res => setPrograms(res.data.data)).catch(console.error);
   }, []);
 
-  const filtered = programs.filter(p => p.name.toLowerCase().includes(search.toLowerCase()) || p.code.toLowerCase().includes(search.toLowerCase()));
+  // Custom sort order based on user request
+  const order = ['BCA', 'BBA', 'B.Tech', 'MCA', 'MBA', 'M.Tech'];
+
+  const filtered = programs
+    .filter(p => p.name.toLowerCase().includes(search.toLowerCase()) || p.code.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => {
+        const indexA = order.indexOf(a.code);
+        const indexB = order.indexOf(b.code);
+        
+        // If both are in the order array, sort by their position
+        if (indexA !== -1 && indexB !== -1) return indexA - indexB;
+        // If only A is in the order array, it comes first
+        if (indexA !== -1) return -1;
+        // If only B is in the order array, it comes first
+        if (indexB !== -1) return 1;
+        
+        // If neither is in the order array, sort alphabetically by code
+        return a.code.localeCompare(b.code);
+    });
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
