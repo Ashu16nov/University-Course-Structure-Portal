@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { Plus, Trash2, Edit2 } from 'lucide-react';
+import { Plus, Trash2, Edit2, Eye } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 export default function Programs() {
   const [programs, setPrograms] = useState([]);
@@ -118,7 +119,7 @@ export default function Programs() {
               <th className="p-4 font-semibold">Program Name</th>
               <th className="p-4 font-semibold">Description</th>
               <th className="p-4 font-semibold">Duration</th>
-              {isAdmin && <th className="p-4 font-semibold text-right">Actions</th>}
+              <th className="p-4 font-semibold text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -127,17 +128,22 @@ export default function Programs() {
                 <td className="p-4 font-bold text-gray-900">{program.name}</td>
                 <td className="p-4 text-gray-600">{program.description}</td>
                 <td className="p-4 text-gray-600">{program.durationYears} Years</td>
-                {isAdmin && (
-                  <td className="p-4 flex justify-end gap-3">
-                    <button onClick={() => handleEdit(program)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
-                    <button onClick={() => handleDelete(program._id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={18} /></button>
-                  </td>
-                )}
+                <td className="p-4 flex justify-end gap-3">
+                  <Link to={`/subjects?program=${program._id}`} className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors" title="View Program Details">
+                    <Eye size={18} />
+                  </Link>
+                  {isAdmin && (
+                    <>
+                      <button onClick={() => handleEdit(program)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
+                      <button onClick={() => handleDelete(program._id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={18} /></button>
+                    </>
+                  )}
+                </td>
               </tr>
             ))}
             {programs.length === 0 && (
               <tr>
-                <td colSpan={isAdmin ? "4" : "3"} className="p-8 text-center text-gray-500">No programs found.</td>
+                <td colSpan="4" className="p-8 text-center text-gray-500">No programs found.</td>
               </tr>
             )}
           </tbody>

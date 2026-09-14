@@ -1,9 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { Plus, Trash2, Edit2 } from 'lucide-react';
+import { Plus, Trash2, Edit2, Eye } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
+import { useSearchParams } from 'react-router-dom';
 
 export default function Subjects() {
+  const [searchParams] = useSearchParams();
+  const initialProgram = searchParams.get('program') || '';
+  const initialSemester = searchParams.get('semester') || '';
+  
   const [subjects, setSubjects] = useState([]);
   const [semesters, setSemesters] = useState([]);
   const [formData, setFormData] = useState({ semester: '', code: '', title: '', credits: '' });
@@ -70,8 +75,8 @@ export default function Subjects() {
     }
   };
 
-  const [filterProgram, setFilterProgram] = useState('');
-  const [filterSemester, setFilterSemester] = useState('');
+  const [filterProgram, setFilterProgram] = useState(initialProgram);
+  const [filterSemester, setFilterSemester] = useState(initialSemester);
 
   // Extract unique programs from semesters list for the filter dropdown
   const uniquePrograms = Array.from(new Map(semesters.filter(s => s.program).map(s => [s.program._id, s.program])).values());
@@ -159,7 +164,7 @@ export default function Subjects() {
               <th className="p-4 font-semibold">Code</th>
               <th className="p-4 font-semibold">Title</th>
               <th className="p-4 font-semibold">Credits</th>
-              {isAdmin && <th className="p-4 font-semibold text-right">Actions</th>}
+              <th className="p-4 font-semibold text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -172,17 +177,22 @@ export default function Subjects() {
                 <td className="p-4 font-bold text-brand-600">{subject.code}</td>
                 <td className="p-4 text-gray-900 font-medium">{subject.title}</td>
                 <td className="p-4 text-gray-600">{subject.credits}</td>
-                {isAdmin && (
-                  <td className="p-4 flex justify-end gap-3 h-full items-center mt-2">
-                    <button onClick={() => handleEdit(subject)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
-                    <button onClick={() => handleDelete(subject._id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={18} /></button>
-                  </td>
-                )}
+                <td className="p-4 flex justify-end gap-3 h-full items-center mt-2">
+                  <button onClick={() => alert(`Details for ${subject.title} coming soon!`)} className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors" title="View Subject Details">
+                    <Eye size={18} />
+                  </button>
+                  {isAdmin && (
+                    <>
+                      <button onClick={() => handleEdit(subject)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
+                      <button onClick={() => handleDelete(subject._id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={18} /></button>
+                    </>
+                  )}
+                </td>
               </tr>
             ))}
             {subjects.length === 0 && (
               <tr>
-                <td colSpan={isAdmin ? "5" : "4"} className="p-8 text-center text-gray-500">No subjects found.</td>
+                <td colSpan="5" className="p-8 text-center text-gray-500">No subjects found.</td>
               </tr>
             )}
           </tbody>

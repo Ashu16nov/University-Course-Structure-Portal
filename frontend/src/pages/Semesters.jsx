@@ -1,7 +1,8 @@
 import { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { Plus, Trash2, Edit2 } from 'lucide-react';
+import { Plus, Trash2, Edit2, Eye } from 'lucide-react';
 import { AuthContext } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 export default function Semesters() {
   const [semesters, setSemesters] = useState([]);
@@ -126,7 +127,7 @@ export default function Semesters() {
               <th className="p-4 font-semibold">Program</th>
               <th className="p-4 font-semibold">Semester No.</th>
               <th className="p-4 font-semibold">Description</th>
-              {isAdmin && <th className="p-4 font-semibold text-right">Actions</th>}
+              <th className="p-4 font-semibold text-right">Actions</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
@@ -135,17 +136,22 @@ export default function Semesters() {
                 <td className="p-4 font-bold text-gray-900">{semester.program?.name}</td>
                 <td className="p-4 font-semibold text-brand-600">Semester {semester.number}</td>
                 <td className="p-4 text-gray-600">{semester.description || '-'}</td>
-                {isAdmin && (
-                  <td className="p-4 flex justify-end gap-3">
-                    <button onClick={() => handleEdit(semester)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
-                    <button onClick={() => handleDelete(semester._id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={18} /></button>
-                  </td>
-                )}
+                <td className="p-4 flex justify-end gap-3">
+                  <Link to={`/subjects?program=${semester.program?._id}&semester=${semester._id}`} className="p-2 text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors" title="View Subjects">
+                    <Eye size={18} />
+                  </Link>
+                  {isAdmin && (
+                    <>
+                      <button onClick={() => handleEdit(semester)} className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"><Edit2 size={18} /></button>
+                      <button onClick={() => handleDelete(semester._id)} className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"><Trash2 size={18} /></button>
+                    </>
+                  )}
+                </td>
               </tr>
             ))}
             {semesters.length === 0 && (
               <tr>
-                <td colSpan={isAdmin ? "4" : "3"} className="p-8 text-center text-gray-500">No semesters found.</td>
+                <td colSpan="4" className="p-8 text-center text-gray-500">No semesters found.</td>
               </tr>
             )}
           </tbody>

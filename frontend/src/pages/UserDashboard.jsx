@@ -64,7 +64,7 @@ export default function UserDashboard() {
       {/* Floating Quick Action Stats */}
       <div className="max-w-5xl mx-auto -mt-24 relative z-20 px-4">
         <div className="bg-white/80 backdrop-blur-xl border border-white rounded-3xl p-4 shadow-xl grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="bg-slate-50 rounded-2xl p-6 flex items-center gap-4 group cursor-pointer hover:bg-brand-50 transition-colors">
+          <Link to="/programs" className="bg-slate-50 rounded-2xl p-6 flex items-center gap-4 group cursor-pointer hover:bg-brand-50 transition-colors">
             <div className="p-4 bg-white rounded-xl shadow-sm text-brand-600 group-hover:scale-110 transition-transform">
               <GraduationCap size={24} />
             </div>
@@ -72,8 +72,8 @@ export default function UserDashboard() {
               <p className="text-sm font-bold text-slate-900">Top Programs</p>
               <p className="text-xs text-slate-500 font-medium mt-1">Explore degrees</p>
             </div>
-          </div>
-          <div className="bg-slate-50 rounded-2xl p-6 flex items-center gap-4 group cursor-pointer hover:bg-indigo-50 transition-colors">
+          </Link>
+          <Link to="/semesters" className="bg-slate-50 rounded-2xl p-6 flex items-center gap-4 group cursor-pointer hover:bg-indigo-50 transition-colors">
             <div className="p-4 bg-white rounded-xl shadow-sm text-indigo-600 group-hover:scale-110 transition-transform">
               <Calendar size={24} />
             </div>
@@ -81,8 +81,8 @@ export default function UserDashboard() {
               <p className="text-sm font-bold text-slate-900">Semesters</p>
               <p className="text-xs text-slate-500 font-medium mt-1">Track timelines</p>
             </div>
-          </div>
-          <div className="bg-slate-50 rounded-2xl p-6 flex items-center gap-4 group cursor-pointer hover:bg-fuchsia-50 transition-colors">
+          </Link>
+          <Link to="/subjects" className="bg-slate-50 rounded-2xl p-6 flex items-center gap-4 group cursor-pointer hover:bg-fuchsia-50 transition-colors">
             <div className="p-4 bg-white rounded-xl shadow-sm text-fuchsia-600 group-hover:scale-110 transition-transform">
               <LayoutGrid size={24} />
             </div>
@@ -90,7 +90,7 @@ export default function UserDashboard() {
               <p className="text-sm font-bold text-slate-900">Core Subjects</p>
               <p className="text-xs text-slate-500 font-medium mt-1">View curriculum</p>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
 
@@ -110,7 +110,7 @@ export default function UserDashboard() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {programs.map((program, index) => (
-            <div key={program._id} className="group relative bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-2 flex flex-col h-full cursor-pointer">
+            <Link to={`/subjects?program=${program._id}`} key={program._id} className="group relative bg-white rounded-[2rem] p-6 shadow-sm border border-gray-100 hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.05)] transition-all duration-300 hover:-translate-y-2 flex flex-col h-full cursor-pointer">
               
               {/* Decorative top gradient line */}
               <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-brand-400 to-indigo-400 rounded-t-[2rem] opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -135,7 +135,7 @@ export default function UserDashboard() {
                   <ArrowRight size={14} />
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
